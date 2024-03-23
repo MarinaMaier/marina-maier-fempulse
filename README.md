@@ -19,7 +19,7 @@ The target users of FemPulse are women of reproductive age who want to gain insi
 
 2. Menstruation Tracking: The app allows users to track their menstrual cycles, including the start and end dates of periods.
 
-3. Ovulation Tracking: W2W provides features for tracking ovulation periods, helping users understand their fertility cycles.
+3. Ovulation Tracking: FemPulse provides features for tracking ovulation periods, helping users understand their fertility cycles.
 
 4. Weekly Insights: At the end of each week, users receive informative summaries that highlight patterns and correlations between mood and menstrual cycles.
 
