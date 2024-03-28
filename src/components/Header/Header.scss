@@ -1,7 +1,10 @@
 .header {
     background-color: #FFFCFB;
+    display: flex;
+    justify-content: center;
     &__logo {
         width: 25rem;
         height: 25rem;
+        border-radius: 50%;
     }
 }
