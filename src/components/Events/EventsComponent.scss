@@ -1,0 +1,13 @@
+.period {
+    display: flex;
+    justify-content: start;
+}
+.mood {
+    display: flex;
+    justify-content: center;
+    .mood-event {
+        img {
+            width: 25px;
+        }
+    }
+}
