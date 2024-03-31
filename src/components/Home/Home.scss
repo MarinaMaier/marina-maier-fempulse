@@ -1,0 +1,18 @@
+.home {
+    .rbc-calendar {
+        height: 500px;
+        width: 90%;
+        margin: 0 auto;
+        .rbc-row-content {
+            .rbc-event {
+                background: none;
+            }
+        }
+
+    }
+
+    .home-params {
+        display: flex;
+    }
+
+}
