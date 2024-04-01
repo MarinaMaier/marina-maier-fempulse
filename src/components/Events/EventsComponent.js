@@ -18,20 +18,20 @@ export function EventsComponent(event) {
       : null;
   return (
     <div>
-      {event.title === "Mood" ? (
+      {event.title === "Mood" &&
         <div className="mood">
           <div className="mood-event">
-            <img src={img} alt="period" />
+            <img src={img} alt="mood" />
           </div>
         </div>
-      ) : null}
-      {event.title === "Period" ? (
+      }
+      {event.title === "Period" &&
         <div className="period d-inline-flex">
           <div className="period-event">
             <img src={drop} alt="period" />
           </div>
         </div>
-      ) : null}
+      }
     </div>
   );
 }
