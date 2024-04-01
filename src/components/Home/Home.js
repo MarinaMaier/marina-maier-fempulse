@@ -2,50 +2,44 @@ import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { Cycle } from "../Cycle/Cycle";
-import { Symptoms } from "../Symptoms/Symptoms";
-import { Mood } from "../Mood/Mood";
+import { BASE_URL } from "../../utils/constant-variables";
+import { Header } from '../Header/Header';
 import "./Home.scss";
 import { EventsComponent } from "../Events/EventsComponent";
 import { EventModal } from "../EventModal/EventModal";
-import axios from "axios";
+import axiosInstance from "../../utils/axios-interceptor";
 
 const localizer = momentLocalizer(moment);
 
 export function Home() {
-  const [cycle, setCycle] = useState(28); // Default cycle length
-  const [events, setEvents] = useState([
-    {
-      start: moment(),
-      end: moment(),
-      title: "Mood",
-      subTitle: "Happy",
-    },
-    {
-      start: moment(),
-      end: moment(),
-      title: "Period",
-      subTitle: "Period",
-    },
-  ])
+  const [events, setEvents] = useState([])
   const [invokeEventModal, setInvokeEventModal] = useState(false);
   const [selectedEvents, setSelectedEvents] = useState([]);
+  const [eventsId, setEventsId] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(moment());
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const getEvents = async () => {
       try {
-        const allEvents =  await axios.get(`http://localhost:8080/home`);
-        //setEvents(allEvents.data);
+        const allEvents =  await axiosInstance.get(`${BASE_URL}/home/calendar/${moment(selectedDate).format('MMYYYY')}`);
+        setEventsId(allEvents?.data?.id)
+        setEvents(JSON.parse(allEvents?.data?.events));
         setIsLoading(false);
       } catch (error) {
+        setEventsId(null)
+        setEvents([]);
         setIsLoading(false);
         setHasError(true);
       }
     }
     getEvents();
-  }, []);
+  }, [selectedDate]);
+
+  const handleViewChange = (date) => {
+    setSelectedDate(date);
+  }
 
   const clickClose = (e) => {
     onEventsChange(e);
@@ -67,15 +61,20 @@ export function Home() {
 
   const onEventsChange = async (e) => {
     try {
-      //const allEvents =  await axios.post(`http://localhost:8080/home`, JSON.stringify([...events, ...e]));
-      setEvents([...events, ...e]);
+      const allEvents =  await axiosInstance.post(`${BASE_URL}/home/calendar/${moment(selectedDate).format('MMYYYY')}`,{
+        id: eventsId || '',
+        events: JSON.stringify([...events, ...e])
+      });
+      setEvents(JSON.parse(allEvents.data.events))
     } catch (error) {
       setHasError(true);
     }
   }
 
   return (
+    
     <div className="home">
+      <Header />
       <Calendar
         localizer={localizer}
         views={["month", "agenda"]} // Change views to 'month' and 'agenda'
@@ -83,14 +82,13 @@ export function Home() {
         onSelectSlot={handleSelectSlot}
         longPressThreshold={10}
         events={events}
+        defaultDate={moment()}
+        onNavigate={handleViewChange}
         components={{
           event: EventsComponent,
         }}
       />
       <div className="home-params">
-        <Cycle />
-        <Symptoms />
-        <Mood />
       </div>
       {invokeEventModal && <EventModal selectedEvents={selectedEvents} clickClose={clickClose} />}
     </div>

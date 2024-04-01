@@ -1,10 +1,33 @@
+@use "../../styles/partials/colors" as *;
+
 .header {
     background-color: #FFFCFB;
     display: flex;
-    justify-content: center;
+    flex-direction: column-reverse;
+    height: 30rem;
     &__logo {
         width: 25rem;
         height: 25rem;
         border-radius: 50%;
+        align-self: center;
+        &:hover {
+            box-shadow: 0 0 20px $shadow;
+            animation: shadow-animation 2s infinite alternate;
+        }
+        @keyframes shadow-animation {
+            0% {
+              box-shadow: $initial-shadow;
+            }
+            100% {
+              box-shadow: $final-shadow;
+            }
+        }
+    }
+    &__logout-icon {
+        margin: 1rem;
+        align-self: end;
+        img {
+            width: 2rem;
+        }
     }
 }
