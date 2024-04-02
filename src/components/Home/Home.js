@@ -3,7 +3,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { BASE_URL } from "../../utils/constant-variables";
-import { Header } from '../Header/Header';
+import { Header } from "../Header/Header";
 import "./Home.scss";
 import { EventsComponent } from "../Events/EventsComponent";
 import { EventModal } from "../EventModal/EventModal";
@@ -12,31 +12,32 @@ import axiosInstance from "../../utils/axios-interceptor";
 const localizer = momentLocalizer(moment);
 
 export function Home() {
-  const [events, setEvents] = useState([])
+  const [events, setEvents] = useState([]);
   const [invokeEventModal, setInvokeEventModal] = useState(false);
   const [selectedEvents, setSelectedEvents] = useState([]);
   const [eventsId, setEventsId] = useState(null);
   const [selectedDate, setSelectedDate] = useState(moment());
-  const [hasError, setHasError] = useState(false);
   // Fetching events based on selectedDate
   useEffect(() => {
     const getEvents = async () => {
       try {
-        const allEvents =  await axiosInstance.get(`${BASE_URL}/home/calendar/${moment(selectedDate).format('MMYYYY')}`);
-        setEventsId(allEvents?.data?.id)
+        const allEvents = await axiosInstance.get(
+          `${BASE_URL}/home/calendar/${moment(selectedDate).format("MMYYYY")}`
+        );
+        setEventsId(allEvents?.data?.id);
         setEvents(JSON.parse(allEvents?.data?.events));
       } catch (error) {
-        setEventsId(null)
+        setEventsId(null);
         setEvents([]);
-        setHasError(true);
+        console.error(`Error: ${error}`);
       }
-    }
+    };
     getEvents();
   }, [selectedDate]);
   // Handling view change in calendar
   const handleViewChange = (date) => {
     setSelectedDate(date);
-  }
+  };
   // Handle closing of event modal
   const clickClose = (e) => {
     onEventsChange(e);
@@ -49,29 +50,37 @@ export function Home() {
       return;
     }
     //  Finding events for the selected date
-    const event = events.filter((event) => (moment(event.start).isSame(slotInfo.start, 'day')));
+    const event = events.filter((event) =>
+      moment(event.start).isSame(slotInfo.start, "day")
+    );
     event.start = slotInfo.start;
     event.end = slotInfo.end;
     setSelectedEvents(event);
     // Filtering out events for the selected date
-    setEvents(events.filter((event) => !(moment(event.start).isSame(slotInfo.start, 'day'))))
+    setEvents(
+      events.filter(
+        (event) => !moment(event.start).isSame(slotInfo.start, "day")
+      )
+    );
     setInvokeEventModal(true);
   };
   // Handling changes in events and send updates to the server
   const onEventsChange = async (e) => {
     try {
-      const allEvents =  await axiosInstance.post(`${BASE_URL}/home/calendar/${moment(selectedDate).format('MMYYYY')}`,{
-        id: eventsId || '',
-        events: JSON.stringify([...events, ...e])
-      });
-      setEvents(JSON.parse(allEvents.data.events))
+      const allEvents = await axiosInstance.post(
+        `${BASE_URL}/home/calendar/${moment(selectedDate).format("MMYYYY")}`,
+        {
+          id: eventsId || "",
+          events: JSON.stringify([...events, ...e]),
+        }
+      );
+      setEvents(JSON.parse(allEvents.data.events));
     } catch (error) {
-      setHasError(true);
+      console.error(`Error: ${error}`);
     }
-  }
+  };
 
   return (
-    
     <div className="home">
       <Header />
       <Calendar
@@ -88,9 +97,10 @@ export function Home() {
           event: EventsComponent,
         }}
       />
-      <div className="home-params">
-      </div>
-      {invokeEventModal && <EventModal selectedEvents={selectedEvents} clickClose={clickClose} />}
+      <div className="home-params"></div>
+      {invokeEventModal && (
+        <EventModal selectedEvents={selectedEvents} clickClose={clickClose} />
+      )}
     </div>
   );
 }
