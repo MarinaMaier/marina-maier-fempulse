@@ -4,8 +4,9 @@ import happyImg from "../../assets/smile.svg";
 import sadImg from "../../assets/sad.svg";
 import neutralImg from "../../assets/neutral.svg";
 import annoyedImg from "../../assets/annoyed.svg";
-
+// Adding mood and periods
 export function EventsComponent(event) {
+  // Determining which mood icon to display based on 'event' prop's subTitle
   const img =
     event?.event?.subTitle === "Happy"
       ? happyImg

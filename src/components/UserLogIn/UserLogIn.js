@@ -9,14 +9,16 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Sending POST request to server to log in the user
       const response = await axios.post(`${BASE_URL}/login`, {
         email,
         password,
       });
+      // Storing token in sessionStorage upon successful login
       sessionStorage.token = response.data.token
       setTimeout(() => {
         navigate("/home");

@@ -1,12 +1,12 @@
 @use "../../styles/partials/_colors" as *;
-
+/* Styles for the welcomepage */
 .welcome {
-  width: 272px;
-  padding: 20px;
+  width: 17rem;
+  padding: 1.25rem;
   background-color: $pinkish;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   margin: 3rem auto;
-  box-shadow: 0 0 20px $shadow;
+  box-shadow: 0 0 1.25rem $shadow;
   &__header {
     text-align: center;
   }
@@ -19,8 +19,8 @@
     
   }
   &__btn-container {
-    padding: 20px;
-    border-radius: 8px;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
   }
   &__btn-signup {
     width: 100%;
@@ -28,9 +28,9 @@
     background-color: $sienna;
     color: $white;
     border: none;
-    border-radius: 20px;
+    border-radius: 1.25rem;
     cursor: pointer;
-    // box-shadow: 0 0 20px $shadow;
+    // box-shadow: 0 0 1.25rem $shadow;
     animation: shadow-animation 5s infinite alternate;
     @keyframes shadow-animation {
       0% {
@@ -48,7 +48,7 @@
     background-color: $sienna;
     color: $white;
     border: none;
-    border-radius: 20px;
+    border-radius: 1.25rem;
     cursor: pointer;
     animation: shadow-animation 5s infinite alternate;
     @keyframes shadow-animation {

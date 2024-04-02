@@ -11,10 +11,11 @@ const SignupForm = () => {
   const [isPending, setIsPending] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const navigate = useNavigate();
-
+   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmit(true);
+    // Creating new user object with email and password
     const newUser = {
       email,
       password
@@ -45,6 +46,7 @@ const SignupForm = () => {
     setIsPending(true);
 
     try {
+      // Sending POST request to server to sign up the user
       const response = await fetch(`${BASE_URL}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -52,6 +54,7 @@ const SignupForm = () => {
       }).then(setIsPending(false));
 
       if (response.ok) {
+        // If sign up is successful, setting submitSuccess state to true and navigating to login page
         setSubmitSuccess(true);
         setTimeout(() => {
           navigate("/login");
@@ -65,11 +68,12 @@ const SignupForm = () => {
       setSubmitSuccess(false);
     }
   };
-
+  // Function to validate email format
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+  // Function to validate password format
   const validatePassword = (password) => {
 
     if (!/[a-zA-Z]/.test(password)) {
@@ -81,6 +85,7 @@ const SignupForm = () => {
     }
     return true;
   };
+  // Function to validate if confirm password matches password
   const validateConfirmPassword = (confirmPassword, password) => {
     return confirmPassword === password;
   };

@@ -1,5 +1,5 @@
 @use "../../styles/partials/mixins" as *;
-
+/* Style for Popup window */
 .event-modal {
   position: fixed;
   z-index: 5;
@@ -62,7 +62,7 @@
     }
   }
 }
-
+/* Changing built-in style */
 .tooltip-custom {
   z-index: 10;
 }
