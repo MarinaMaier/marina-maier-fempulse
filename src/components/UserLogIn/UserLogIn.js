@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./UserLogIn.scss";
 import axios from "axios";
-const BASE_URL = "http://localhost:8080";
-
+import { BASE_URL } from "../../utils/constant-variables";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");

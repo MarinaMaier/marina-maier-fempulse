@@ -24,7 +24,7 @@ axiosInstance.interceptors.response.use(
     console.log(error);
     // Handle error responses
     if (error.response.status === 401) {
-        window.location.href = `${window.location.origin}/login`
+        window.location.href = `${window.location.origin}`
     }
     return Promise.reject(error);
   }

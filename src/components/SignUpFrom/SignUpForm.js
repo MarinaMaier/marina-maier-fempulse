@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const BASE_URL = "http://localhost:8080";
+import { BASE_URL } from "../../utils/constant-variables";
+
 const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

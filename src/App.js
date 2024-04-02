@@ -3,7 +3,7 @@ import { WelcomePage } from './pages/WelcomePage';
 import { SignUpPage } from './pages/SignUpPage';
 import { LoginPage } from './pages/LoginPage';
 import { Home } from './components/Home/Home';
-
+import "./App.css";
 
 function App() {
 
