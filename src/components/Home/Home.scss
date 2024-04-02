@@ -1,0 +1,27 @@
+/* Calendar style */
+.home {
+    .rbc-calendar {
+        height: 31.25rem;
+        width: 90%;
+        margin: 0 auto;
+        .rbc-row, .rbc-date-cell, .rbc-day-bg {
+            cursor: pointer;
+        }
+        .rbc-row-content {
+            .rbc-event {
+                background: none;
+            }
+        }
+    }
+
+    .home-params {
+        display: flex;
+    }
+}
+
+.rbc-today {
+    background-color: #f7cabc;
+}
+.rbc-off-range-bg {
+    background-color: #eaccc2c7;
+}

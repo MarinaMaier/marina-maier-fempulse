@@ -1,0 +1,18 @@
+@use "./breakpoints" as *;
+
+@mixin mobile {
+  @media screen and (min-width: 320px) and (max-width: 425px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}

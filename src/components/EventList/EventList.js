@@ -1,3 +1,0 @@
-function EventList() {
-    const Periods = []
-}

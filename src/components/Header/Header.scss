@@ -1,7 +1,41 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+/* Header style */
 .header {
-    background-color: #FFFCFB;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 25rem;
+    &__link {
+        align-self: center;
+    }
     &__logo {
-        width: 25rem;
-        height: 25rem;
+        width: 20rem;
+        height: 20rem;
+        border-radius: 50%;
+        box-shadow: 0 0 1.25rem $shadow;
+        &:hover {
+            animation: shadow-animation 2s infinite alternate;
+            @keyframes shadow-animation {
+                0% {
+                box-shadow: $initial-shadow;
+                }
+                100% {
+                box-shadow: $final-shadow;
+                }
+            }
+        }
+    @include mobile {
+        width: 15rem;
+        height: 15rem;
+    }    
+    }
+    &__logout-icon {
+        cursor: pointer;
+        margin: 1rem;
+        align-self: end;
+        img {
+            width: 2rem;
+        }
     }
 }
