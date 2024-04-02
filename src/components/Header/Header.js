@@ -2,8 +2,6 @@ import logo from "../../assets/logo-fempulse.png";
 import logoutIcon from "../../assets/door-closed-fill.svg";
 import "./Header.scss";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import axiosInstance from "../../utils/axios-interceptor";
-import { BASE_URL } from "../../utils/constant-variables";
 import { Link } from "react-router-dom"; 
 
 export function Header() {
