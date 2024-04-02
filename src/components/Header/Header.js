@@ -7,8 +7,11 @@ import { BASE_URL } from "../../utils/constant-variables";
 import { Link } from "react-router-dom"; 
 
 export function Header() {
+  // Function to handle logout action
   const logout = async () => {
+    // Removing token from sessionStorage
     sessionStorage.removeItem("token");
+    // Redirecting to home page
     window.location.href = `${window.location.origin}`;
   };
   return (

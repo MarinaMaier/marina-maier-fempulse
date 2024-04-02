@@ -1,6 +1,6 @@
 @use "../../styles/partials/colors" as *;
 @use "../../styles/partials/mixins" as *;
-
+/* Header style */
 .header {
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
         width: 20rem;
         height: 20rem;
         border-radius: 50%;
-        box-shadow: 0 0 20px $shadow;
+        box-shadow: 0 0 1.25rem $shadow;
         &:hover {
             animation: shadow-animation 2s infinite alternate;
             @keyframes shadow-animation {

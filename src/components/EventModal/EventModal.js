@@ -16,11 +16,12 @@ import { useState } from "react";
 
 export function EventModal({ selectedEvents, clickClose }) {
   const [events, setEvents] = useState(selectedEvents);
-
+  // Function to add or remove event based on title and subTitle
   const addEvent = (title, subTitle) => {
     const isExistingIndex = events.findIndex(
       (event) => event.title === title && event.subTitle === subTitle
     );
+    // Creating a new array 'newSelectedEvents' by either removing or adding the event
     const newSelectedEvents =
       isExistingIndex !== -1
         ? [...events.slice(0, isExistingIndex), ...events.slice(isExistingIndex + 1)]
@@ -33,15 +34,16 @@ export function EventModal({ selectedEvents, clickClose }) {
               subTitle: subTitle,
             },
           ]
+    // Updating 'events' state with sorted 'newSelectedEvents' array
     setEvents(newSelectedEvents.sort((a, b) => a.title.localeCompare(b.title)));
   };
-
+  // Function to check if an event with given title and subTitle already exists
   const checkExistingEvent = (title, subTitle) => {
     return !!events?.filter(
       (event) => event.title === title && event.subTitle === subTitle
     ).length;
   };
-
+  // Function to close the modal and pass 'events' back to parent component
   const closeModal = () => {
     clickClose(events);
   }

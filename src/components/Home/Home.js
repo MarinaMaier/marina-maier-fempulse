@@ -18,7 +18,7 @@ export function Home() {
   const [eventsId, setEventsId] = useState(null);
   const [selectedDate, setSelectedDate] = useState(moment());
   const [hasError, setHasError] = useState(false);
-
+  // Fetching events based on selectedDate
   useEffect(() => {
     const getEvents = async () => {
       try {
@@ -33,29 +33,31 @@ export function Home() {
     }
     getEvents();
   }, [selectedDate]);
-
+  // Handling view change in calendar
   const handleViewChange = (date) => {
     setSelectedDate(date);
   }
-
+  // Handle closing of event modal
   const clickClose = (e) => {
     onEventsChange(e);
     setSelectedEvents([]);
     setInvokeEventModal(false);
   };
-
+  // Handling selection of a time slot in calendar
   const handleSelectSlot = (slotInfo) => {
     if (moment(slotInfo.start).isAfter(moment())) {
       return;
     }
+    //  Finding events for the selected date
     const event = events.filter((event) => (moment(event.start).isSame(slotInfo.start, 'day')));
     event.start = slotInfo.start;
     event.end = slotInfo.end;
     setSelectedEvents(event);
+    // Filtering out events for the selected date
     setEvents(events.filter((event) => !(moment(event.start).isSame(slotInfo.start, 'day'))))
     setInvokeEventModal(true);
   };
-
+  // Handling changes in events and send updates to the server
   const onEventsChange = async (e) => {
     try {
       const allEvents =  await axiosInstance.post(`${BASE_URL}/home/calendar/${moment(selectedDate).format('MMYYYY')}`,{
