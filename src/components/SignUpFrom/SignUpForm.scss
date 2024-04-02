@@ -5,10 +5,12 @@
   height: 20rem;
   margin: 3rem auto;
   &__welcome {
+    box-shadow: 0 0 20px grey;
     width: 400px;
     padding: 20px;
     background-color: #fffcfb;
     border-radius: 8px;
+    
   }
   &__header {
     text-align: center;

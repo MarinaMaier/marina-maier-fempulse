@@ -1,12 +1,12 @@
 @use "../../styles/partials/_colors" as *;
 
 .welcome {
-  background-color: $pinkish;
-  width: 400px;
+  width: 272px;
   padding: 20px;
   background-color: $pinkish;
   border-radius: 8px;
   margin: 3rem auto;
+  box-shadow: 0 0 20px $shadow;
   &__header {
     text-align: center;
   }
@@ -16,6 +16,7 @@
     align-items: center;
     height: 10rem;
     width: 100%;
+    
   }
   &__btn-container {
     padding: 20px;

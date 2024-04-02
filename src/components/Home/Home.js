@@ -17,7 +17,6 @@ export function Home() {
   const [selectedEvents, setSelectedEvents] = useState([]);
   const [eventsId, setEventsId] = useState(null);
   const [selectedDate, setSelectedDate] = useState(moment());
-  const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
@@ -26,11 +25,9 @@ export function Home() {
         const allEvents =  await axiosInstance.get(`${BASE_URL}/home/calendar/${moment(selectedDate).format('MMYYYY')}`);
         setEventsId(allEvents?.data?.id)
         setEvents(JSON.parse(allEvents?.data?.events));
-        setIsLoading(false);
       } catch (error) {
         setEventsId(null)
         setEvents([]);
-        setIsLoading(false);
         setHasError(true);
       }
     }
@@ -80,6 +77,7 @@ export function Home() {
         views={["month", "agenda"]} // Change views to 'month' and 'agenda'
         selectable={true}
         onSelectSlot={handleSelectSlot}
+        onSelectEvent={handleSelectSlot}
         longPressThreshold={10}
         events={events}
         defaultDate={moment()}
