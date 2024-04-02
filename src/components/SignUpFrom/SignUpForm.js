@@ -6,43 +6,42 @@ const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const [hasSubmit, setHasSubmit] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const navigate = useNavigate();
-   // Function to handle form submission
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmit(true);
     // Creating new user object with email and password
     const newUser = {
       email,
-      password
+      password,
     };
-     // Check if any field is empty
-  if (!email || !password || !confirmPassword) {
-    console.error("Please fill out all fields");
-    return;
-  }
+    // Check if any field is empty
+    if (!email || !password || !confirmPassword) {
+      console.error("Please fill out all fields");
+      return;
+    }
 
-  // Check if email is valid
-  if (!validateEmail(email)) {
-    console.error("Please provide a valid email");
-    return;
-  }
+    // Check if email is valid
+    if (!validateEmail(email)) {
+      console.error("Please provide a valid email");
+      return;
+    }
 
-  // Check if password is valid
-  if (!validatePassword(password)) {
-    console.error("Please provide a valid password");
-    return;
-  }
+    // Check if password is valid
+    if (!validatePassword(password)) {
+      console.error("Please provide a valid password");
+      return;
+    }
 
-  // Check if confirm password matches password
-  if (!validateConfirmPassword(confirmPassword, password)) {
-    console.error("Passwords do not match");
-    return;
-  }
+    // Check if confirm password matches password
+    if (!validateConfirmPassword(confirmPassword, password)) {
+      console.error("Passwords do not match");
+      return;
+    }
     setIsPending(true);
 
     try {
@@ -75,7 +74,6 @@ const SignupForm = () => {
   };
   // Function to validate password format
   const validatePassword = (password) => {
-
     if (!/[a-zA-Z]/.test(password)) {
       return false;
     }

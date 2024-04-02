@@ -19,7 +19,7 @@ const LoginForm = () => {
         password,
       });
       // Storing token in sessionStorage upon successful login
-      sessionStorage.token = response.data.token
+      sessionStorage.token = response.data.token;
       setTimeout(() => {
         navigate("/home");
       }, 1000);
