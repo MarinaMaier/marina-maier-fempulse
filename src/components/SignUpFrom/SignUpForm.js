@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/constant-variables";
+import PasswordInput from "../PasswordInput/PasswordInput";
 
 const SignupForm = () => {
   const [email, setEmail] = useState("");
@@ -102,6 +103,7 @@ const SignupForm = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="current-email"
             required
           />
         </div>
@@ -109,13 +111,9 @@ const SignupForm = () => {
           <label className="form__label" htmlFor="password">
             Password
           </label>
-          <input
-            className="form__input"
-            type="password"
-            id="password"
+          <PasswordInput
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
         </div>
         <div className="form__group">
