@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import "./UserLogIn.scss";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constant-variables";
+import PasswordInput from "../PasswordInput/PasswordInput";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,6 +45,7 @@ const LoginForm = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="current-email"
             required
           />
         </div>
@@ -50,13 +53,11 @@ const LoginForm = () => {
           <label className="form__label" htmlFor="password">
             Password
           </label>
-          <input
-            className="form__input"
-            type="password"
+          <PasswordInput 
+            className="form__eye"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
         </div>
         {error && <p className="error-message">{error}</p>}
